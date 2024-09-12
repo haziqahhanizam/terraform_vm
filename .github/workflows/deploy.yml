@@ -20,9 +20,14 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          auth-type: 'IDENTITY'
+          auth-type: IDENTITY
+          client-id: a821faec-cd05-4ecf-a7d8-eba7eee014bd
           environment: azurecloud
+          enable-AzPSSession: false
+          allow-no-subscriptions: false
+          audience: api://AzureADTokenExchange
         env:
+          TERRAFORM_CLI_PATH: /home/runner/work/_temp/8dcb0d83-f6d4-40cf-85db-aecce8e08b3c
           AZURE_SUBSCRIPTION_ID: eeae8ca6-4e89-4182-b885-937dd6251ff3
 
       - name: Terraform Init
