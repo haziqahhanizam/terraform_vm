@@ -4,10 +4,9 @@ on:
   push:
     branches:
       - master
-
 jobs:
   terraform:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -21,11 +20,10 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          auth-type: 'identity'
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          auth-type: 'IDENTITY'
           environment: azurecloud
         env:
-          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: eeae8ca6-4e89-4182-b885-937dd6251ff3
 
       - name: Terraform Init
         run: terraform init
