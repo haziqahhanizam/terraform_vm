@@ -22,7 +22,7 @@ jobs:
       - name: Login with Azure CLI using User Assigned Managed Identity
         run: |
           az cloud set --name AzureCloud
-          az login --identity --username ${{ secrets.AZURE_MANAGED_IDENTITY_CLIENT_ID }}
+          az login --identity --client-id ${{ secrets.AZURE_MANAGED_IDENTITY_CLIENT_ID }}
           az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Setup Terraform
