@@ -13,20 +13,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Set up Azure CLI
+        uses: azure/setup-azure-cli@v1
+        with:
+          azure-cli-version: '2.0.0'
+
+      - name: Login with Azure CLI using User Assigned Managed Identity
+        run: |
+          az cloud set --name AzureCloud
+          az login --identity --username ${{ secrets.AZURE_MANAGED_IDENTITY_CLIENT_ID }}
+          az account set --subscription ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.0.0
-
-      - name: Azure Login
-        uses: azure/login@v1
-        with:
-          auth-type: identity
-          environment: azurecloud
-          enable-AzPSSession: false
-          allow-no-subscriptions: false
-          audience: api://AzureADTokenExchange
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
         run: terraform init
