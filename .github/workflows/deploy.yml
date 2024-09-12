@@ -22,8 +22,8 @@ jobs:
         uses: azure/login@v1
         with:
           auth-type: identity
-          enable-AzPSSession: false
           environment: azurecloud
+          enable-AzPSSession: false
           allow-no-subscriptions: false
           audience: api://AzureADTokenExchange
 
