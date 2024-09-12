@@ -26,6 +26,7 @@ jobs:
           enable-AzPSSession: false
           allow-no-subscriptions: false
           audience: api://AzureADTokenExchange
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
         run: terraform init
