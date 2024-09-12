@@ -1,5 +1,6 @@
 provider "azurerm" {
   features {}
+  use_msi = true
   subscription_id = "eeae8ca6-4e89-4182-b885-937dd6251ff3"
   tenant_id       = "a821faec-cd05-4ecf-a7d8-eba7eee014bd"
 }
