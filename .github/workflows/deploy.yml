@@ -18,10 +18,9 @@ jobs:
         with:
           terraform_version: 1.0.0
 
-      - name: Setup Azure CLI
-        uses: azure/setup-azure-cli@v1
-        with:
-          azure_cli_version: 'latest'
+      - name: Install Azure CLI
+        run: |
+          choco install azure-cli
 
       - name: Azure Login
         run: |
