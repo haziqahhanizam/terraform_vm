@@ -3,7 +3,7 @@ name: 'Terraform Deploy'
 on:
   push:
     branches:
-      - master 
+      - master
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -20,7 +20,8 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          auth-type: 'managed-identity'
+          auth-type: 'IDENTITY'
+          environment: azurecloud
         env:
           AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
