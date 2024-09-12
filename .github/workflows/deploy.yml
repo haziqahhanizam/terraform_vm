@@ -3,8 +3,7 @@ name: 'Terraform Deploy'
 on:
   push:
     branches:
-      - master
-
+      - master 
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -21,7 +20,9 @@ jobs:
       - name: Azure Login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          auth-type: 'managed-identity'
+        env:
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
         run: terraform init
