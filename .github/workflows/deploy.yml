@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-
 jobs:
   terraform:
     runs-on: windows-latest
@@ -19,32 +18,20 @@ jobs:
           terraform_version: 1.0.0
 
       - name: Azure Login
-        uses: azure/login@v2
+        uses: azure/login@v1
         with:
           auth-type: IDENTITY
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          enable-AzPSSession: true
           environment: azurecloud
+          enable-AzPSSession: false
+          allow-no-subscriptions: false
           audience: api://AzureADTokenExchange
+        env:
+          TERRAFORM_CLI_PATH: /home/runner/work/_temp/8dcb0d83-f6d4-40cf-85db-aecce8e08b3c
+          AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Apply
         run: terraform apply -auto-approve
-
-      - name: Azure CLI script
-        uses: azure/cli@v2
-        with:
-          azcliversion: latest
-          inlineScript: |
-            az account show
-
-      - name: Azure PowerShell script
-        uses: azure/powershell@v2
-        with:
-          azPSVersion: "latest"
-          inlineScript: |
-            Get-AzContext
